@@ -1,4 +1,5 @@
 <?php
+require('conexion.php');
 
 //Filtros: Input array
 $filtros = [
