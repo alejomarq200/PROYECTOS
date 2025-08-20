@@ -38,7 +38,7 @@
         </tr>
         <tbody>
             <?php
-            //Sencia que valide si el id existe y no lo inserte
+            //Sentencia que valide si el id existe y no lo inserte
             // $stmtExiste = $bd->prepare('SELECT cedula, nombre FROM usuarios WHERE cedula = :cedula AND nombre = :nombre');
             // $stmtExiste->bindValue(':cedula', $_POST['cedula'], PDO::PARAM_STR);
             // $stmtExiste->bindValue(':nombre', $_POST['nombre'], PDO::PARAM_STR);
