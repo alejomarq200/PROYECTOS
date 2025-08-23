@@ -16,8 +16,8 @@
 </style>
 <form action="tabla.php" method="POST">
  <!--   <input type="text" name="cedula" placeholder="Ingresa tu cedula">
-    <input type="text" name="nombre" placeholder="Ingresa tu nombre">
-    <input type="text" name="apellido" placeholder="Ingresa tu apellido"> -->
+        <input type="text" name="nombre" placeholder="Ingresa tu nombre">
+        <input type="text" name="apellido" placeholder="Ingresa tu apellido"> -->
     <input type="text" name="cedula">
     <input type="text" name="nombre">
     <button type="button" id="reset">Resetear tabla</button>
@@ -25,7 +25,7 @@
 </form>
     <?php
     include("conexion.php");
-    //error_reporting(0);
+    error_reporting(0);
     $variable = (!empty($_POST['cedula']) && !empty($_POST['nombre'])) ? true : false;
     if ($variable) {
     ?>
