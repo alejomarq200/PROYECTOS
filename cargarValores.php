@@ -9,7 +9,7 @@ header('Access-Control-Allow-Headers: Content-Type');
 $stmt = $bd->prepare("SELECT * FROM usuarios");
 $stmt->execute();
 $usuarios = $stmt->fetchAll();
-if($stmt->rowCount() > 0){
+if ($stmt->rowCount() > 0) {
     $datos = array();
     foreach ($usuarios as $usuario) {
         $datos[] = array(

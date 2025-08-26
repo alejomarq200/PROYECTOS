@@ -17,6 +17,7 @@ $stmtSearch->bindValue(':id', $data['userId'], PDO::PARAM_INT);
 $stmtSearch->execute();
 
 if ($stmtSearch->rowCount() > 0) {
+    
     $usuario = $stmtSearch->fetch();
     echo json_encode(array(
         'id' => $usuario->id,

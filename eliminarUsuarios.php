@@ -20,11 +20,13 @@ $stmtCedula->bindValue(':cedula', $data['cedula'], PDO::PARAM_STR);
 $stmtCedula->execute();   
 
 if($stmtCedula->rowCount() > 0){
+
     $stmtDelete = $bd->prepare("DELETE FROM usuarios WHERE cedula = :cedula");
     $stmtDelete->bindValue(':cedula', $data['cedula'], PDO::PARAM_STR);
     $stmtDelete->execute();
+    
     if($stmtDelete->rowCount() > 0){
-        echo json_encode(array('mensaje' => 'Usuario eliminado con éxito'));
+        echo json_encode(array('success' => 'Usuario eliminado con éxito'));
     } else {
         echo json_encode(array('error' => 'Error al eliminar el usuario'));
     }

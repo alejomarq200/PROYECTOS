@@ -108,14 +108,13 @@
 <body>
     <div class="container">
         <h1>Gestión de Usuarios</h1>
-
-        <form action="">
+        <form action="" >
             <label for="cedula" class="label">Cédula:</label>
-            <input type="text" class="input" name="cedula" placeholder="Cédula">
+            <input type="text" class="input" name="cedula" id="cedula" placeholder="Cédula">
             <label for="nombre" class="label">Nombre:</label>
-            <input type="text" class="input" name="nombre" placeholder="Nombre">
+            <input type="text" class="input" name="nombre" id="nombre" placeholder="Nombre">
             <label for="apellido" class="label">Apellido:</label>
-            <input type="text" class="input" name="apellido" placeholder="Apellido">
+            <input type="text" class="input" name="apellido" id="apellido" placeholder="Apellido">
             <div id="mensaje"></div>
             <button type="button" onclick="cargarTodos()">Cargar Usuarios</button>
             <button type="button" onclick="registrarUsuarios()">Registrar Usuarios</button>
@@ -128,35 +127,46 @@
 
     <script>
         function cargarTodos() {
+            /* El fetch() La función devuelve a Promise lo cual se cumple con a Response
+               objeto que representa la respuesta del servidor. Luego puede verificar el estado de la solicitud
+               y extraer el cuerpo de la respuesta en varios formatos, incluidos texto y JSON, llamando al método
+               apropiado en la respuesta. */
             fetch('cargarValores.php')
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data);
+                    //console.log(data.error);
                     enlistarValores(data);
                 })
                 .catch(error => console.error('Error:', error));
         }
 
         function registrarUsuarios() {
+            /* Devuelve el primer elemento del documento 
+            (utilizando un recorrido primero en profundidad pre ordenado de los nodos del documento) 
+            que coincida con el grupo especificado de selectores. */
             const formulario = document.querySelector('form');
+            
+            //Array de objetos
             const info = {
                 cedula: document.querySelector('input[name="cedula"]').value,
                 nombre: document.querySelector('input[name="nombre"]').value,
                 apellido: document.querySelector('input[name="apellido"]').value
             };
+
             fetch('registrarUsuarios.php', {
                     method: 'POST',
                     headers: {
                         Accept: 'application/json',
                         'Content-Type': 'application/json'
                     },
+                    /*El método JSON.stringify() toma un valor de JavaScript como argumento principal y devuelve una representación de cadena JSON de ese valor.*/
                     body: JSON.stringify(info)
                 })
                 .then(resp => resp.json())
                 .then(data => {
                     const mensajeDiv = document.getElementById('mensaje');
-                    if (data.mensaje) {
-                        mensajeDiv.innerHTML = `<p style="color: green;">${data.mensaje}</p>`;
+                    if (data.success) {
+                        mensajeDiv.innerHTML = `<p style="color: green;">${data.success}</p>`;
                         setTimeout(() => {
                             window.location.href = 'practicaConJson.php';
                         }, "1500");
@@ -185,8 +195,8 @@
                 .then(resp => resp.json())
                 .then(data => {
                     const mensajeDiv = document.getElementById('mensaje');
-                    if (data.mensaje) {
-                        mensajeDiv.innerHTML = `<p style="color: green;">${data.mensaje}</p>`;
+                    if (data.success) {
+                        mensajeDiv.innerHTML = `<p style="color: green;">${data.success}</p>`;
                         setTimeout(() => {
                             window.location.href = 'practicaConJson.php';
                         }, "1000");
@@ -217,9 +227,9 @@
                 })
                 .then(resp => resp.json())
                 .then(data => {
-                    document.querySelector('input[name="cedula"]').value = data.cedula;
-                    document.querySelector('input[name="nombre"]').value = data.nombre;
-                    document.querySelector('input[name="apellido"]').value = data.apellido;
+                    document.getElementById('cedula').value = data.cedula;
+                    document.getElementById('nombre').value = data.nombre;
+                    document.getElementById('apellido').value = data.apellido;
 
                     if (data.error) {
                         const mensajeDiv = document.getElementById('mensaje');
@@ -235,18 +245,18 @@
             const usersContainer = document.getElementById('users-container');
             usersContainer.innerHTML = ''; // Limpiar contenedor antes de agregar nuevos elementos
 
-            data.forEach((valor, index) => {
+            data.forEach((data, index) => {
                 usersContainer.innerHTML += `
                     <div class="user-card">
-                        <input type="radio" name="seleccionar" onclick="tomarValores(${valor.id})">
-                        <p class="user-id">Usuario #${valor.id}</p>
+                        <input type="radio" name="seleccionar" onclick="tomarValores(${data.id})">
+                        <p class="user-id">Usuario #${data.id}</p>
                         <div class="user-detail">
                             <span class="label">Cédula:</span>
-                            <span>${valor.cedula}</span>
+                            <span>${data.cedula}</span>
                         </div>
                         <div class="user-detail">
                             <span class="label">Nombre:</span>
-                            <span>${valor.nombre}</span>
+                            <span>${data.nombre}</span>
                         </div>
                     </div>
                 `;
@@ -254,5 +264,4 @@
         }
     </script>
 </body>
-
 </html>
