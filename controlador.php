@@ -31,8 +31,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $mensajesError[] = 'la contraseña es obligatorioa';
     }
 
-    'SELECT id FROM usuarios WHERE id = 1';
-
     if ($semaforo) {
         echo 'los datos llegaron correctamente';
     } else {

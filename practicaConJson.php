@@ -108,7 +108,7 @@
 <body>
     <div class="container">
         <h1>Gestión de Usuarios</h1>
-        <form action="" >
+        <form action="">
             <label for="cedula" class="label">Cédula:</label>
             <input type="text" class="input" name="cedula" id="cedula" placeholder="Cédula">
             <label for="nombre" class="label">Nombre:</label>
@@ -128,9 +128,10 @@
     <script>
         function cargarTodos() {
             /* El fetch() La función devuelve a Promise lo cual se cumple con a Response
-               objeto que representa la respuesta del servidor. Luego puede verificar el estado de la solicitud
-               y extraer el cuerpo de la respuesta en varios formatos, incluidos texto y JSON, llamando al método
-               apropiado en la respuesta. */
+               objeto que representa la respuesta del servidor. Luego puede verificar el
+               estado de la solicitud y extraer el cuerpo de la respuesta en varios formatos,
+               incluidos texto y JSON, llamando al método apropiado en la respuesta. */
+
             fetch('cargarValores.php')
                 .then(response => response.json())
                 .then(data => {
@@ -145,7 +146,7 @@
             (utilizando un recorrido primero en profundidad pre ordenado de los nodos del documento) 
             que coincida con el grupo especificado de selectores. */
             const formulario = document.querySelector('form');
-            
+
             //Array de objetos
             const info = {
                 cedula: document.querySelector('input[name="cedula"]').value,
@@ -264,4 +265,5 @@
         }
     </script>
 </body>
+
 </html>
