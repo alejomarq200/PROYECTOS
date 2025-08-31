@@ -79,33 +79,35 @@
 </head>
 
 <body>
-    <form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST">
+    <form action="<?php $_SERVER['PHP_SELF']; ?>" method="POST" id="fomulario-js">
         <h2 style="text-align: center; margin-bottom:10px;">VALDACIÓN DE CAMPOS</h2>
         <input type="text" id="usuario" name="usuario" placeholder="Escribe tu nombre de usuario">
         <span class="error" id="error-usuario"></span>
-
         <input type="text" id="email" name="email" placeholder="Escribe tu email">
         <span class="error" id="error-email"></span>
-
         <button type="submit" id="btn-enviar">ENVIAR</button>
     </form>
 </body>
 <script>
+    const formulario = document.getElementById('fomulario-js');
     const btnEnviar = document.getElementById('btn-enviar');
 
     const validación = (e) => {
+        //Detener el envío de mi formuario
         e.preventDefault();
-        const nombreDeUsuario = document.getElementById('usuario');
-        const direcciónEmail = document.getElementById('email');
 
-        if (nombreDeUsuario.value === "") {
+        const nombreDeUsuario = document.getElementById('usuario').value.trim();
+        const direcciónEmail = document.getElementById('email').value.trim();
+
+        if (nombreDeUsuario === "") {
             alert("Por favor, escribe tu nombre de usuario.");
-            nombreDeUsuario.focus();
+            //nombreDeUsuario.focus();
             return false;
         }
-        if (direcciónEmail.value === "") {
+
+        if (direcciónEmail === "") {
             alert("Por favor, escribe tu correo electrónico");
-            direcciónEmail.focus();
+            //direcciónEmail.focus();
             return false;
         }
         return true;
@@ -113,23 +115,31 @@
 
     const validacion1 = (e) => {
         e.preventDefault();
+
+        //Definimos variables
         const nombreDeUsuario = document.getElementById('usuario');
         const direcciónEmail = document.getElementById('email');
 
+        //Semáforo o flag
         let isValid = true;
 
         if (nombreDeUsuario.value === "") {
-            //alert("Por favor, escribe tu nombre de usuario.");
             document.getElementById('error-usuario').textContent = 'Por favor, escribe tu nombre de usuario';
             isValid = false;
             usuario.focus();
+        } else {
+            document.getElementById('error-usuario').textContent = '';
         }
+
         if (direcciónEmail.value === "") {
-            //alert("Por favor, escribe tu correo electrónico");
             document.getElementById('error-email').textContent = 'Por favor, escribe tu correo electrónico';
             isValid = false;
             email.focus();
+        } else {
+            document.getElementById('error-email').textContent = '';
         }
+
+        //Preguntamos si luego de validar los campos isValid sigue siendo true
         if (isValid) {
             alert('Los campo se llenaron correctamente');
             return true;
@@ -138,6 +148,7 @@
 
     const validacion2 = (e) => {
         e.preventDefault();
+
         const nombreDeUsuario = document.getElementById('usuario');
         const direcciónEmail = document.getElementById('email');
 
@@ -151,6 +162,7 @@
         } else {
             document.getElementById('error-usuario').style.display = 'none';
         }
+        
         if (direcciónEmail.value === "") {
             document.getElementById('error-email').style.display = 'block';
             document.getElementById('error-email').textContent = 'Por favor, escribe tu correo electrónico';
@@ -159,6 +171,7 @@
         } else {
             document.getElementById('error-email').style.display = 'none';
         }
+
         if (isValid) {
             alert('Los campo se llenaron correctamente');
             return true;
@@ -167,6 +180,7 @@
 
     const validacion3 = (e) => {
         e.preventDefault();
+
         const nombreDeUsuario = document.getElementById('usuario');
         const direcciónEmail = document.getElementById('email');
 
@@ -176,12 +190,18 @@
             nombreDeUsuario.style.borderBlockColor = 'red';
             document.getElementById('error-usuario').textContent = 'Por favor, escribe tu nombre de usuario';
             isValid = false;
+        } else {
+            document.getElementById('error-usuario').textContent = '';
         }
+
         if (direcciónEmail.value === "") {
             direcciónEmail.style.borderBlockColor = 'red';
             document.getElementById('error-email').textContent = 'Por favor, escribe tu correo electrónico';
             isValid = false;
+        } else {
+            document.getElementById('error-email').textContent = '';
         }
+
         if (isValid) {
             nombreDeUsuario.style.borderBlockColor = 'green';
             direcciónEmail.style.borderBlockColor = 'green';
@@ -190,32 +210,8 @@
         }
     }
 
-    const validacion4 = (e) => {
-        e.preventDefault();
-        const nombreDeUsuario = document.getElementById('usuario');
-        const direcciónEmail = document.getElementById('email');
-
-        //Patrones o regex 
-        let isValid = true;
-
-        if (nombreDeUsuario.value === "") {
-            nombreDeUsuario.style.borderBlockColor = 'red';
-            document.getElementById('error-usuario').textContent = 'Por favor, escribe tu nombre de usuario';
-            isValid = false;
-        }
-        if (direcciónEmail.value === "") {
-            direcciónEmail.style.borderBlockColor = 'red';
-            document.getElementById('error-email').textContent = 'Por favor, escribe tu correo electrónico';
-            isValid = false;
-        }
-        if (isValid) {
-
-            alert('Los campo se llenaron correctamente');
-            return true;
-        }
-    }
-
-    btnEnviar.addEventListener('click', validación);
+    //Listener para botón
+    btnEnviar.addEventListener('click', validacion3);
 </script>
 </body>
 

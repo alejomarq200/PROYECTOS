@@ -157,14 +157,14 @@
 
             <button type="submit" id="btn-enviar">ENVIAR</button>
 
-            <div class="form-footer">
+            <div class="form-footer" style="color: red;">
                 Todos los campos son obligatorios
             </div>
         </form>
 
         <div class="requirements">
             <h3>Requisitos de validación:</h3>
-            <ul>
+            <ul style="color: red;">
                 <li>Usuario: 4-15 caracteres, solo letras, números y guiones bajos</li>
                 <li>Email: debe tener un formato de email válido</li>
             </ul>
@@ -173,9 +173,12 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            //Definimos variables a manipular
             const form = document.getElementById('myForm');
             const usuarioInput = document.getElementById('usuario');
             const emailInput = document.getElementById('email');
+
+            //Definimos campos de error
             const errorUsuario = document.getElementById('error-usuario');
             const errorEmail = document.getElementById('error-email');
 
@@ -221,27 +224,6 @@
                         usuarioInput.classList.remove('success');
                         emailInput.classList.remove('success');
                     }, 2000);
-                }
-            });
-
-            // Validación en tiempo real
-            usuarioInput.addEventListener('input', function() {
-                if (usuarioRegex.test(this.value)) {
-                    clearError(usuarioInput, errorUsuario);
-                    usuarioInput.classList.remove('error');
-                    usuarioInput.classList.add('success');
-                } else {
-                    usuarioInput.classList.remove('success');
-                }
-            });
-
-            emailInput.addEventListener('input', function() {
-                if (emailRegex.test(this.value)) {
-                    clearError(emailInput, errorEmail);
-                    emailInput.classList.remove('error');
-                    emailInput.classList.add('success');
-                } else {
-                    emailInput.classList.remove('success');
                 }
             });
 
